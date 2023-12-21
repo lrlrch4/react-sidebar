@@ -1,57 +1,69 @@
 import './App.css';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Rutas from './pages/Rutas';
-import { Corredores, Amarillo, Azul, Morado, Rojo, Amarillo101, Amarillo102, Azul301, Azul303, Azul305, Azul336, Azul370, Azul371, Morado404, Morado405, Morado406, Morado409, Morado412, Rojo201, Rojo204, Rojo206, Rojo209} from './pages/Corredores';
-import {Burra, Este, Oeste} from './pages/Burra';
-import Paraderos from './pages/Paraderos'
+// import Rutas from './pages/Rutas';
+// import { Corredores, Amarillo, Azul, Morado, Rojo, Amarillo101, Amarillo102, Azul301, Azul303, Azul305, Azul336, Azul370, Azul371, Morado404, Morado405, Morado406, Morado409, Morado412, Rojo201, Rojo204, Rojo206, Rojo209} from './pages/Corredores';
+// import {Burra, Este, Oeste} from './pages/Burra';
+// import Paraderos from './pages/Paraderos'
+import Map from './pages/Map'
 
 
 function App() {
+
+  const corredores = ['101', '107', '201', '204', '206', '209', '301', '303', '305', '336', '370', '371', '404', '405', '406', '409', '412']
+  const amarillo = ['101', '107']
+  const azul =  ['301', '303', '305', '336', '370', '371']
+  const morado = ['404', '405', '406', '409', '412']
+  const rojo = ['201', '204', '206', '209']
+
+
   return (
     <>  
     
 
     <Router>
       <Sidebar />
-      
+
       <Routes>
 
-        <Route path='/rutas' element = {<Rutas/>} />
+        <Route path='/' element={<Map item={{ route: 0 }} />} />
+        <Route path="/paraderos" element={<Map item={{ route: 0}} />} />
+        <Route path="/corredores" element={<Map item={{ route:  corredores}} />} />
+        <Route path="/corredores/amarillo" element={<Map item={{ route: amarillo }} />}  />
+          {amarillo.map((route) => {
+              return (
+                <Route path={`/corredores/amarillo/${route}`} element={<Map item={{ route: [route] }} />} />
+              )
+            })
+          }
 
-        <Route path='/paraderos' element = {<Paraderos/>} />
+        <Route path="/corredores/azul" element={<Map item={{ route: azul}} />}  />
+          {azul.map((route) => {
+              return (
+                <Route path={`/corredores/azul/${route}`} element={<Map item={{ route: [route] }} />} />
+              )
+            })
+          }   
 
-        <Route path='/corredores' element = {<Corredores/>} />
+        <Route path="/corredores/morado" element={<Map item={{ route:  morado}} />} />
+          {morado.map((route) => {
+              return (
+                <Route path={`/corredores/morado/${route}`} element={<Map item={{ route: [route] }} />} />
+              )
+            })
+          }
 
-          <Route path='/corredores/amarillo' element= {<Amarillo/>} />
-            <Route path='/corredores/amarillo/101' element= {<Amarillo101/>} />
-            <Route path='/corredores/amarillo/102' element= {<Amarillo102/>} />
+        <Route path="/corredores/rojo"  element={<Map item={{ route:  rojo}} />}/>
+          {rojo.map((route) => {
+              return (
+                <Route path={`/corredores/rojo/${route}`} element={<Map item={{ route: [route] }} />} />
+              )
+            })
+          }
           
-          <Route path='/corredores/azul' element= {<Azul/>} />
-            <Route path='/corredores/azul/301' element= {<Azul301/>}/>
-            <Route path='/corredores/azul/303' element= {<Azul303/>}/>
-            <Route path='/corredores/azul/305' element= {<Azul305/>}/>
-            <Route path='/corredores/azul/336' element= {<Azul336/>}/>
-            <Route path='/corredores/azul/370' element= {<Azul370/>}/>
-            <Route path='/corredores/azul/371' element= {<Azul371/>}/>
-
-
-          <Route path='/corredores/morado' element= {<Morado/>} />
-            <Route path='/corredores/morado/404' element= {<Morado404/>}/>
-            <Route path='/corredores/morado/405' element= {<Morado405/>}/>
-            <Route path='/corredores/morado/406' element= {<Morado406/>}/>
-            <Route path='/corredores/morado/409' element= {<Morado409/>}/>
-            <Route path='/corredores/morado/412' element= {<Morado412/>}/>
-          
-          <Route path='/corredores/rojo' element= {<Rojo/>} />
-            <Route path='/corredores/rojo/201' element= {<Rojo201/>}/>
-            <Route path='/corredores/rojo/204' element= {<Rojo204/>}/>  
-            <Route path='/corredores/rojo/206' element= {<Rojo206/>}/>
-            <Route path='/corredores/rojo/209' element= {<Rojo209/>}/>
-
-        <Route path='/burra' element = {<Burra/>} />
-          <Route path='/burra/este' element = {<Este/>} />
-          <Route path='/burra/oeste' element = {<Oeste/>} />
+        <Route path="/burra" element={<Map item={{ route: 0 }} />} />
+        <Route path="/burra/este" element={<Map item={{ route: 0 }} />} />
+        <Route path="/burra/oeste" element={<Map item={{ route: 0 }} />} />
 
       </Routes>
     </Router>

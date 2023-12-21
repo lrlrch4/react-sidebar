@@ -1,18 +1,18 @@
 import React from 'react';
 import * as RiIcons from 'react-icons/ri';
 
-import { MdEmojiTransportation } from "react-icons/md"
+// import { MdEmojiTransportation } from "react-icons/md"
 import { GiBusStop } from "react-icons/gi";
 import { FaBus } from "react-icons/fa";
 import { GiDonkey } from "react-icons/gi";
 
 
 export const SidebarData = [
-  {
-    title: 'Rutas',
-    path: '/rutas',
-    icon: <MdEmojiTransportation  />,    
-  },
+  // {
+  //   title: 'Rutas',
+  //   path: '/rutas',
+  //   icon: <MdEmojiTransportation  />,    
+  // },
 
   {
     title: 'Paraderos',
@@ -40,8 +40,8 @@ export const SidebarData = [
             cName: 'subsub-nav'
           },
           {
-            code: '102',
-            path: '/corredores/amarillo/102',
+            code: '107',
+            path: '/corredores/amarillo/107',
             cName: 'subsub-nav'
           }
         ]
