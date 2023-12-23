@@ -1,25 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled  from 'styled-components';
 
 
-const StyledLogo = styled.div` 
+const StyledLogo = styled(Link)` 
     margin-left: 1rem; 
+    background-color: transparent
 `
-const StyledBrand = styled.div` 
+const StyledBrand = styled(Link)` 
     margin-left: 1rem;
     color: white;
     font: rudik;
+    text-decoration: none;
 `
 const Logo = () => {
   // Importa tu logo o proporciona el código SVG, imagen, etc.
   return (
     <>
 
-    <StyledBrand>
+    <StyledBrand to='/'>
       Geo Bus Perú
     </StyledBrand>
 
-    <StyledLogo>       
+    <StyledLogo to='/'>       
 
         <svg width="48" height="57" viewBox="0 0 48 57" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.3926 51.465H24.3163H35.5378C35.5378 55.5466 36.3601 56 40.4717 56C45.0768 56 44.5834 52.4546 44.5834 50.6405C47.8727 49.7748 47.0503 35.7576 46.4336 27.5533C45.5317 15.5563 43.5555 5.86788 35.5378 4.87833C35.5378 -0.200927 33.8931 1.16789 24.3163 1.16789C12.3102 1.00298 12.3926 1.16789 12.3926 4.87833C6.84195 5.29061 2.3537 12.0931 1.7023 27.5533C1.08565 42.1889 -0.147849 50.6405 3.55254 50.6405C3.55254 55.5877 3.55254 56 7.86976 56C12.3926 56 12.3926 56 12.3926 51.465Z" fill="white"/>
