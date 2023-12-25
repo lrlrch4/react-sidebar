@@ -28,7 +28,7 @@ const NavIcon = styled(Link)`
 
 const SidebarNav = styled.nav`
   background: #15171c;
-  width: 250px;
+  width: 200px;
   height: 90vh;
   display: flex;
   justify-content: center;
@@ -69,7 +69,7 @@ const Sidebar = () => {
             <NavIcon to='#'>
               <FaIcons.FaBars onClick={showSidebar} />
             </NavIcon>          
-            <Logo/>  
+            <Logo/>              
         </Nav>
 
         

@@ -14,11 +14,6 @@ export const SidebarData = [
   //   icon: <MdEmojiTransportation  />,    
   // },
 
-  {
-    title: 'Paraderos',
-    path: '/paraderos',
-    icon: <GiBusStop />,
-  },
 
   {
     title: 'Corredores',
