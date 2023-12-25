@@ -1,5 +1,6 @@
 import './App.css';
 import Sidebar from './components/Sidebar';
+import { SocketProvider } from './externalSocket/SocketContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Rutas from './pages/Rutas';
 // import { Corredores, Amarillo, Azul, Morado, Rojo, Amarillo101, Amarillo102, Azul301, Azul303, Azul305, Azul336, Azul370, Azul371, Morado404, Morado405, Morado406, Morado409, Morado412, Rojo201, Rojo204, Rojo206, Rojo209} from './pages/Corredores';
@@ -19,54 +20,59 @@ function App() {
 
   return (
     <>  
+    <SocketProvider>
+      {
+        <Router>
+          <Sidebar />
     
+          <Routes>
+    
+            <Route path='/' element={<Map item={{ route: 0 }} />} />
+            <Route path="/paraderos" element={<Map item={{ route: 0}} />} />
+            <Route path="/corredores" element={<Map item={{ route:  corredores}} />} />
+            <Route path="/corredores/amarillo" element={<Map item={{ route: amarillo }} />}  />
+              {amarillo.map((route) => {
+                  return (
+                    <Route path={`/corredores/amarillo/${route}`} element={<Map item={{ route: [route] }} />} />
+                  )
+                })
+              }
+    
+            <Route path="/corredores/azul" element={<Map item={{ route: azul}} />}  />
+              {azul.map((route) => {
+                  return (
+                    <Route path={`/corredores/azul/${route}`} element={<Map item={{ route: [route] }} />} />
+                  )
+                })
+              }   
+    
+            <Route path="/corredores/morado" element={<Map item={{ route:  morado}} />} />
+              {morado.map((route) => {
+                  return (
+                    <Route path={`/corredores/morado/${route}`} element={<Map item={{ route: [route] }} />} />
+                  )
+                })
+              }
+    
+            <Route path="/corredores/rojo"  element={<Map item={{ route:  rojo}} />}/>
+              {rojo.map((route) => {
+                  return (
+                    <Route path={`/corredores/rojo/${route}`} element={<Map item={{ route: [route] }} />} />
+                  )
+                })
+              }
+              
+            <Route path="/burra" element={<Map item={{ route: 0 }} />} />
+            <Route path="/burra/este" element={<Map item={{ route: 0 }} />} />
+            <Route path="/burra/oeste" element={<Map item={{ route: 0 }} />} />
+    
+          </Routes>
+        </Router>
+      }
 
-    <Router>
-      <Sidebar />
+    </SocketProvider>
 
-      <Routes>
-
-        <Route path='/' element={<Map item={{ route: 0 }} />} />
-        <Route path="/paraderos" element={<Map item={{ route: 0}} />} />
-        <Route path="/corredores" element={<Map item={{ route:  corredores}} />} />
-        <Route path="/corredores/amarillo" element={<Map item={{ route: amarillo }} />}  />
-          {amarillo.map((route) => {
-              return (
-                <Route path={`/corredores/amarillo/${route}`} element={<Map item={{ route: [route] }} />} />
-              )
-            })
-          }
-
-        <Route path="/corredores/azul" element={<Map item={{ route: azul}} />}  />
-          {azul.map((route) => {
-              return (
-                <Route path={`/corredores/azul/${route}`} element={<Map item={{ route: [route] }} />} />
-              )
-            })
-          }   
-
-        <Route path="/corredores/morado" element={<Map item={{ route:  morado}} />} />
-          {morado.map((route) => {
-              return (
-                <Route path={`/corredores/morado/${route}`} element={<Map item={{ route: [route] }} />} />
-              )
-            })
-          }
-
-        <Route path="/corredores/rojo"  element={<Map item={{ route:  rojo}} />}/>
-          {rojo.map((route) => {
-              return (
-                <Route path={`/corredores/rojo/${route}`} element={<Map item={{ route: [route] }} />} />
-              )
-            })
-          }
-          
-        <Route path="/burra" element={<Map item={{ route: 0 }} />} />
-        <Route path="/burra/este" element={<Map item={{ route: 0 }} />} />
-        <Route path="/burra/oeste" element={<Map item={{ route: 0 }} />} />
-
-      </Routes>
-    </Router>
+    
     </>
   );
 }
