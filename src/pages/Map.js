@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { SocketContext } from '../externalSocket/SocketContext';
 import L from 'leaflet';
-import io from 'socket.io-client';
 import customIconUrl from '../assets/bus.svg';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,32 +14,35 @@ const customIcon = new L.Icon({
 
 const MyMap = ({ item }) => {
   const { route } = item;
-  const [positions, setPositions] = useState({}); // Estado para almacenar las posiciones de varios buses
-  const [socket, setSocket] = useState(null);
+  const [routes, setRoutes] = useState({});
+  const [positions, setPositions] = useState({}); 
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:1234');
-    setSocket(newSocket);
 
-    // Enviar las rutas a seguir
-    newSocket.emit('seguirRuta', route);
+    setRoutes(route)
 
-    // Escuchar actualizaciones para cada ruta
-    newSocket.on('actualizacionCoordenadas', (data) => {
-      if (data.position) {
-        setPositions(prevPositions => ({
-          ...prevPositions,
-          [data.rutaid]: data.position
-        }));
-      }
-    });
+    if (socket) {
+      socket.emit('seguirRuta', route);
 
-    // Desconectar cuando el componente se desmonte
-    return () => {
-      setPositions({});
-      newSocket.disconnect();
+      socket.on('actualizacionCoordenadas', (data) => {
+        if (data.position) {
+          setPositions(prevPositions => ({
+            ...prevPositions,
+            [data.rutaid]: data.position
+          }));
+        }
+      });
     }
-  }, [route]);
+
+    // Cleanup function
+    return () => {
+      setPositions({})
+      if (socket) {
+        socket.off('actualizacionCoordenadas');
+      }
+    };
+  }, [socket, route]);
 
   // Centro inicial del mapa
   const center = [-12.1456799, -76.981861];
