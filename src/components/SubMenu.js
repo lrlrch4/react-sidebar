@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import { useTheme } from './ThemeContext';
 
 
-export const Highlight = '#08088A'
+export const Highlight = '#8797ab'
 
+//Side bar display
 const SidebarLink = styled(Link)`
     display: flex; 
-    color: #e1e9fc;
+    color: ${({ theme }) => (theme === 'dark' ? 'white' : '#15171c' )};
     justify content: space-between;
     align-items: center; 
     padding: 20px;
     list-style: none;
     height: 50px;
     text-decoration: none;
-    font-size: 18 px;
+    font-size: 14 px;
 
     &:hover {
-        background: #252831;
+        background: ${({ theme }) => (theme === 'dark' ? '#252831' : '#e0e0e0' )};
         border-left: 6px solid ${Highlight} ;
         cursor: pointer;
     }
@@ -28,16 +30,16 @@ const SidebarLabel = styled.span`
     margin-left: 16px;
 `;
 
-// Estilos de menu desplegado
+// Corredores by color display
 const DropdownLink = styled(Link)`
-    background: #202227;
+    background: ${({ theme }) => (theme === 'dark' ? '#15171c' : 'white' )};
     height: 40px; 
     padding-left: 3rem;
     display: flex; 
     align-items: center;
     text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
+    color: ${({ theme }) => (theme === 'dark' ? 'white' : '#15171c' )};
+    font-size: 16px;
 
     &:hover {
         background: ${Highlight};
@@ -48,13 +50,13 @@ const DropdownLink = styled(Link)`
 `
 
 const DropdownLink2 = styled(Link)`
-    background: #202227;
+    background: ${({ theme }) => (theme === 'dark' ? '#15171c' : 'white' )};
     height: 30px; 
     padding-left: 3rem;
     display: grid; 
     align-items: center;
     text-decoration: none;
-    color: #f5f5f5;
+    color: ${({ theme }) => (theme === 'dark' ? 'white' : '#15171c' )};
     font-size: 14px;
     grid-template-columns: 3fr 3fr;
 
@@ -68,13 +70,15 @@ const DropdownLink2 = styled(Link)`
 `
 
 const SubMenu = ({ item }) => {
+    const { theme } = useTheme();
+
     const [subnav, setSubnav] = useState(false);
   
     const showSubnav = () => setSubnav(!subnav);
   
     return (
       <>
-        <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
+        <SidebarLink to={item.path} onClick={item.subNav && showSubnav} theme = {theme}>
           <div>
             {item.icon}
             <SidebarLabel>{item.title}</SidebarLabel>
@@ -93,7 +97,7 @@ const SubMenu = ({ item }) => {
         {subnav &&  item.subNav.map((subNavItem, index) => (
             <div key={index}>
 
-              <DropdownLink to={subNavItem.path}>
+              <DropdownLink to={subNavItem.path} theme = {theme}>
                 {subNavItem.icon}
                 <SidebarLabel>{subNavItem.title}</SidebarLabel>
               </DropdownLink>
@@ -103,7 +107,7 @@ const SubMenu = ({ item }) => {
                     
                     <div key={subIndex}>
                     
-                        <DropdownLink2 to={subsubNavItem.path}> 
+                        <DropdownLink2 to={subsubNavItem.path} theme = {theme}> 
                             
                               {subsubNavItem.code} 
                                                       
