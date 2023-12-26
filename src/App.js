@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import {Burra, Este, Oeste} from './pages/Burra';
 // import Paraderos from './pages/Paraderos'
 import Map from './pages/Map'
-
+import { ThemeProvider } from './components/ThemeContext';
 
 function App() {
 
@@ -19,7 +19,8 @@ function App() {
 
 
   return (
-    <>  
+    <> 
+    <ThemeProvider>
     <SocketProvider>
       {
         <Router>
@@ -71,7 +72,7 @@ function App() {
       }
 
     </SocketProvider>
-
+    </ThemeProvider> 
     
     </>
   );

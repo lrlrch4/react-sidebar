@@ -7,10 +7,12 @@ import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 import Logo from '../Logo';
 import { Highlight } from './SubMenu';
+import { useTheme } from './ThemeContext';
 
 
+//Upper bar 
 const Nav = styled.div`
-  background: #15171c;
+  background: ${({ theme }) => (theme === 'dark' ? '#15171c' : 'white')};
   height: 10vh;
   display: flex;
   justify-content: flex-start;
@@ -23,11 +25,12 @@ const NavIcon = styled(Link)`
   height: 40px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center;  
 `;
 
+//Left lateral bar
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: ${({ theme }) => (theme === 'dark' ? '#15171c' : 'white')};
   width: 200px;
   height: 90vh;
   display: flex;
@@ -57,23 +60,27 @@ const SidebarWrap = styled.div`
 
 
 const Sidebar = () => {
+  const { theme } = useTheme();
+
   const [sidebar, setSidebar] = useState(true);
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  const iconColor = theme === 'dark' ? '#fff' : '#15171c';
+
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff'}}>
+      <IconContext.Provider value={{ color: iconColor}}>
         
-        <Nav>          
-            <NavIcon to='#'>
+        <Nav theme = {theme}>          
+            <NavIcon to='#' >
               <FaIcons.FaBars onClick={showSidebar} />
             </NavIcon>          
             <Logo/>              
         </Nav>
 
         
-        <SidebarNav sidebar={sidebar}>
+        <SidebarNav sidebar={sidebar} theme = {theme}>
 
             <SidebarWrap>
 
