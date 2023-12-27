@@ -28,8 +28,8 @@ function App() {
     
           <Routes>
     
-            <Route path='/' element={<Map item={{ route: [10] }} />} />
-            <Route path="/paraderos" element={<Map item={{ route: [10]}} />} />
+            <Route path='/' element={<Map item={{ route: corredores }} />} />
+            <Route path="/paraderos" element={<Map item={{ route: corredores}} />} />
             <Route path="/corredores" element={<Map item={{ route:  corredores}} />} />
             <Route path="/corredores/amarillo" element={<Map item={{ route: amarillo }} />}  />
               {amarillo.map((route) => {
