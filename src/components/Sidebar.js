@@ -31,7 +31,7 @@ const NavIcon = styled(Link)`
 //Left lateral bar
 const SidebarNav = styled.nav`
   background: ${({ theme }) => (theme === 'dark' ? '#15171c' : 'white')};
-  width: 200px;
+  width: 180px;
   height: 90vh;
   display: flex;
   justify-content: center;
