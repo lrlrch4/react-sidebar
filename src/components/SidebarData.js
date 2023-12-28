@@ -2,7 +2,7 @@ import React from 'react';
 import * as RiIcons from 'react-icons/ri';
 
 // import { MdEmojiTransportation } from "react-icons/md"
-import { GiBusStop } from "react-icons/gi";
+// import { GiBusStop } from "react-icons/gi";
 import { FaBus } from "react-icons/fa";
 import { GiDonkey } from "react-icons/gi";
 
